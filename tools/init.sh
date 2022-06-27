@@ -29,7 +29,7 @@ check_init() {
   local _has_inited=false
 
   if [[ ! -d .github ]]; then # using option `--no-gh`
-    _has_inited=true
+    _has_inited=false
   else
     if [[ -f .github/workflows/$ACTIONS_WORKFLOW ]]; then
       # on BSD, the `wc` could contains blank
