@@ -87,7 +87,7 @@ init_files() {
   echo "[INFO] Initialization successful!"
 }
 
-#check_status
+check_status
 
 check_init
 
