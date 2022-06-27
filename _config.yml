@@ -21,12 +21,12 @@ timezone: Asia/Seoul
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Chirpy                          # the main title
+title: 일하는 냐옹이                          # the main title
 
-tagline: A text-focused Jekyll theme   # it will display as the sub-title
+tagline: 잠 자는게 좋아   # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
-  A minimal, responsive, and powerful Jekyll theme for presenting professional writing.
+  냥냥
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: https://gzgzg2.github.io/
@@ -82,7 +82,7 @@ theme_mode:   # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: 'assets/img/profile/navi_1.jpeg'
 
 # boolean type, the global switch for ToC in posts.
 toc: true
