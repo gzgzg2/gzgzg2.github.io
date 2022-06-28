@@ -209,15 +209,16 @@
         {% continue %}
       {% endif %}
 
+<!--      {% capture anchor %}<a href="#{{ id }}" class="anchor text-muted"><i class="fas fa-hashtag"></i></a>{% endcapture %}-->
       {% assign id = snippet | split: '"' | first %}
-      {% capture anchor %}<a href="#{{ id }}" class="anchor text-muted"><i class="fas fa-hashtag"></i></a>{% endcapture %}
-
       {% assign left = snippet | split: mark_end | first %}
       {% assign right = snippet | slice: left.size, snippet.size %}
-      {% assign left = left | replace: '">', '"><span class="mr-2">' | append: '</span>' %}
+      {% assign left = left | replace: '">', '">
+          <a href="#{{ id }}" class="anchor text-muted"><i class="fas fa-hashtag"></i></a>
+          <span class="mr-2">' | append: '</span>' %}
 
       {% assign _new_content = _new_content | append: mark_start
-          | append: left | append: anchor | append: right
+          | append: left |append: right
       %}
 
     {% endfor %}
