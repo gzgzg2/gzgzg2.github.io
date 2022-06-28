@@ -214,8 +214,8 @@
 
       {% assign left = snippet | split: mark_end | first %}
       {% assign right = snippet | slice: left.size, snippet.size %}
-      {% assign left = left | replace: '">', '"> replace' %}
-      {% assign left = left | replace: 'replace', anchor %}
+      {% assign left = left | replace: '">', '"> ram-point' %}
+      {% assign left = left | replace: 'ram-point', anchor %}
 
       {% assign _new_content = _new_content | append: mark_start
           | append: left | append: right
