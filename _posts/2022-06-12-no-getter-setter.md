@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Java] Getter Setter 필요없을까?"
+title: "[Java] Java Beans Pattern 멀리할래요"
 categories:
 - Java
 
@@ -13,7 +13,7 @@ toc: true
 toc_sticky: true
 
 date: 2022-06-12
-last_modified_at: 2022-06-28
+last_modified_at: 2022-06-29
 comments: true
 ---
 
