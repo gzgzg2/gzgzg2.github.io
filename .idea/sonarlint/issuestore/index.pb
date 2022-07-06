@@ -251,19 +251,37 @@ P
  _posts/2022-04-15-os-study-11.md,0/9/09f305d1280b6da010931fe2a3a70b5f272e354e
 U
 %_posts/2022-04-29-network-study-02.md,2/8/282e271557b57d442be0862d8e3124e95809e08f
-I
-_posts/2022-05-01-dns.md,2/b/2bbc886a96e9dab2065d8fac74467c871b9f048b
 V
 &_posts/2022-05-14-글또7기-다짐.md,4/8/48c7a476b17e5bb678513bbeda7fc8a561f8590f
 U
 %_posts/2022-05-29-network-study-03.md,f/0/f0d37f8c633102a82c935bd5c150e0a2fde72607
 U
 %_posts/2022-06-05-network-study-04.md,2/9/299b146d51e4a19098c634fa72a1ace2dc49bcbb
-U
-%_posts/2022-06-26-java-syncronized.md,4/d/4d5c9fb45638c51215ff8136478e6cd7f00af0bf
 =
 tools/init.sh,7/6/76789a4b79cfea457c05bc8c1daae97912ccf3ed
 <
 package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
 ;
 .gitmodules,7/4/7445606fbf8f3683cd42bdc54b05d7a0bc2dfc44
+K
+jekyll-theme-chirpy.gemspec,c/1/c1cb02b32ec57806ddab6a76b57ac585922c336a
+=
+.editorconfig,6/2/626a747c8694eaae66f2afb3d1a745b045782c70
+>
+.gitattributes,2/4/24139dae656713ba861751fb2c2ac38839349a7a
+R
+".github/workflows/pages-deploy.yml,e/7/e701130112a28f50bc22027e9dfbe482fdf9bd0e
+W
+'.github/workflows/issue-interceptor.yml,7/f/7f6fffae3be4e5034a40eadcf1315e341a5258a0
+N
+_plugins/posts-lastmod-hook.rb,b/9/b97fad8b8877e2cb880f060edaa090c6aacdeff5
+B
+_layouts/page.html,8/b/8b421129e621bb2aca5057f6bdb5e5905633134c
+A
+_layouts/tag.html,e/8/e8e72a09e6625fe1056c7dddc7cf93f9a3f0502d
+B
+_layouts/tags.html,c/7/c76ca511b1e54594c2b0af4f17b6dd5715c010aa
+B
+_layouts/home.html,f/8/f87bb2fcce406e16253570011cce02227981f242
+E
+_layouts/default.html,8/8/88dc137ae43bf7a2fa27381f48221b3eb9908aac
