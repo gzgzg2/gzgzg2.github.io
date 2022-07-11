@@ -303,3 +303,5 @@ I
 _posts/2022-05-01-dns.md,2/b/2bbc886a96e9dab2065d8fac74467c871b9f048b
 \
 ,_posts/2022-02-16-spring-boot-redis.markdown,3/3/33c0067851dda4077e9c8413ce2f45d3506e3f3b
+U
+%_posts/2022-06-12-no-getter-setter.md,2/7/2748e3bfcc2e3bc95adb719eb1e794dc88e3651a
