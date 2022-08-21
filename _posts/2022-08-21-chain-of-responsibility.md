@@ -288,17 +288,12 @@ public class LongDistancePassengerFareCalculator implements FareChain {
 
 
 
-## 결론
-예제의 시나리오는 Chain Of Responsibility Pattern 뿐만 아니라 다른 방법을 이용하여도 조건문을 제거할 수 있다.  
-하지만 이번 게시글은 Chain Of Responsibility Pattern을 위한 글이므로 다른 방법은 소개하지 않았다.
-
-
 ---
 
 # Reference
-### **Hotspot** 
-- https://refactoring.guru/design-patterns/chain-of-responsibility
-= https://www.geeksforgeeks.org/chain-responsibility-design-pattern/
+### **Chain Of Responsibility Pattern** 
+- <https://refactoring.guru/design-patterns/chain-of-responsibility>
+- <https://www.geeksforgeeks.org/chain-responsibility-design-pattern/>
 
 
 
