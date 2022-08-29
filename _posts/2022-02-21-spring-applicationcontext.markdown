@@ -2,7 +2,7 @@
 layout: post
 title: "SpringFramework - Web ApplicationContext"
 categories:
-  - Tobi
+  - Toby
 tags:
   - springframework
   - applicationContext
