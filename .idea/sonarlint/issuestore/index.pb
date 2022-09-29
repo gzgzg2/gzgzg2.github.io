@@ -219,8 +219,6 @@ R
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
-d
-4_posts/2022-02-21-spring-applicationcontext.markdown,7/b/7b30f561b8556792693a72f8effe5662bb7b1cbf
 V
 &_posts/2022-03-15-os-study-02.markdown,0/f/0fa4264e0a2a8cc95dfeea60a7271329052bc587
 P
@@ -243,8 +241,6 @@ U
 %_posts/2022-04-14-network-study-01.md,6/0/6080827949bb342bca5f23d60f6d4dc02f1037ae
 P
  _posts/2022-04-15-os-study-09.md,5/2/52732dadb5d2eab0eb52c2286c0d18a0d22abee4
-P
- _posts/2022-04-15-os-study-10.md,1/1/1165f3a0ffd715c5babea9916285f77f3307df9a
 P
  _posts/2022-04-15-os-study-11.md,0/9/09f305d1280b6da010931fe2a3a70b5f272e354e
 U
@@ -301,7 +297,7 @@ F
 _layouts/category.html,2/0/2081e30e01bfa0d640cdef1827bc9d5c3bdd0a8c
 I
 _posts/2022-05-01-dns.md,2/b/2bbc886a96e9dab2065d8fac74467c871b9f048b
-\
-,_posts/2022-02-16-spring-boot-redis.markdown,3/3/33c0067851dda4077e9c8413ce2f45d3506e3f3b
 U
 %_posts/2022-06-12-no-getter-setter.md,2/7/2748e3bfcc2e3bc95adb719eb1e794dc88e3651a
+T
+$_posts/2022-07-07-java-hotspot-vm.md,d/1/d1145afba32038b0efdf90b3e4c47e2b361a1cf2
