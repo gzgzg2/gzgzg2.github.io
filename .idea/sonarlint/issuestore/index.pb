@@ -301,3 +301,5 @@ U
 %_posts/2022-06-12-no-getter-setter.md,2/7/2748e3bfcc2e3bc95adb719eb1e794dc88e3651a
 T
 $_posts/2022-07-07-java-hotspot-vm.md,d/1/d1145afba32038b0efdf90b3e4c47e2b361a1cf2
+\
+,_posts/2022-08-21-chain-of-responsibility.md,7/8/78f406e1154f24598ddf885284de916872df546c
