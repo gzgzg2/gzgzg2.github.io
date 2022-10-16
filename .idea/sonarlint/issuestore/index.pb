@@ -291,8 +291,6 @@ H
 _layouts/categories.html,8/9/893c257b0699e22a049ecb9e41605b8e6fd3bc15
 F
 _layouts/category.html,2/0/2081e30e01bfa0d640cdef1827bc9d5c3bdd0a8c
-I
-_posts/2022-05-01-dns.md,2/b/2bbc886a96e9dab2065d8fac74467c871b9f048b
 U
 %_posts/2022-06-12-no-getter-setter.md,2/7/2748e3bfcc2e3bc95adb719eb1e794dc88e3651a
 \
