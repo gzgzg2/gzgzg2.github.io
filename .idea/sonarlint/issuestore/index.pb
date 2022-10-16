@@ -223,10 +223,6 @@ V
 &_posts/2022-03-15-os-study-02.markdown,0/f/0fa4264e0a2a8cc95dfeea60a7271329052bc587
 P
  _posts/2022-03-16-os-study-03.md,e/1/e1397dd38dac2d6b8ed2de55b76e92c597922fc6
-P
- _posts/2022-03-17-os-study-01.md,d/6/d6750bee935a631e7f1a6d9e949ab89797aeec19
-P
- _posts/2022-03-22-os-study-04.md,3/c/3ced94534af9a12fc02a84c06e6026383bf70fb5
 S
 #_posts/2022-03-22-os-study-04-02.md,e/5/e554d8970cae6753c583251520b7d26581edd753
 P
@@ -299,7 +295,7 @@ I
 _posts/2022-05-01-dns.md,2/b/2bbc886a96e9dab2065d8fac74467c871b9f048b
 U
 %_posts/2022-06-12-no-getter-setter.md,2/7/2748e3bfcc2e3bc95adb719eb1e794dc88e3651a
-T
-$_posts/2022-07-07-java-hotspot-vm.md,d/1/d1145afba32038b0efdf90b3e4c47e2b361a1cf2
 \
 ,_posts/2022-08-21-chain-of-responsibility.md,7/8/78f406e1154f24598ddf885284de916872df546c
+V
+&_posts/2022-08-29-toby-spring-start.md,7/c/7cfacde9a0349631adc3fc7764e1b675921e3c9e
