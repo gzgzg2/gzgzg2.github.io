@@ -185,7 +185,7 @@ public class MillionVoltsAttack implements Attack {
 ---
 
 # Reference
-### **Chain Of Responsibility Pattern** 
+### **Strategy Pattern** 
 - <https://refactoring.guru/design-patterns/strategy/java/example>
 - <https://en.wikipedia.org/wiki/Strategy_pattern>
 - <https://www.baeldung.com/java-strategy-pattern>
