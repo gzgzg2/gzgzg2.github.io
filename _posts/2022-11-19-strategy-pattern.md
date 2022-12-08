@@ -118,7 +118,7 @@ public class HeadbuttAttack implements Attack {
 public class IronTailAttack implements Attack {
     @Override
     public String doAttack() {
-        return "아이언 태일!!";
+        return "아이언 테일!!";
     }
 }
 
@@ -177,7 +177,7 @@ public class MillionVoltsAttack implements Attack {
 ### Lambda로 전략 생성하기
 ```java
  Pikachu pikachu = new Pikachu(() -> "몸통 박치기 !!");
-        pikachu.changeAttack(() -> "아이언 태일 !!");
+        pikachu.changeAttack(() -> "아이언 테일 !!");
         pikachu.changeAttack(() -> "백만볼트 !!");
 ```
 인터페이스의 메소드가 하나인 경우 위처럼 간단하게 구현체를 생성할 수 있다. 
