@@ -1,0 +1,331 @@
+<!DOCTYPE html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="generator" content="Jekyll v4.3.1" /><meta property="og:title" content="SpringBoot - Redis Client 적용기" /><meta property="og:locale" content="en" /><meta name="description" content="들어가며" /><meta property="og:description" content="들어가며" /><link rel="canonical" href="https://gzgzg2.github.io//posts/spring-boot-redis/" /><meta property="og:url" content="https://gzgzg2.github.io//posts/spring-boot-redis/" /><meta property="og:site_name" content="일하는 냐옹이" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2022-02-16T00:00:00+09:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="SpringBoot - Redis Client 적용기" /><meta name="twitter:site" content="@none" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-02-21T00:00:00+09:00","datePublished":"2022-02-16T00:00:00+09:00","description":"들어가며","headline":"SpringBoot - Redis Client 적용기","mainEntityOfPage":{"@type":"WebPage","@id":"https://gzgzg2.github.io//posts/spring-boot-redis/"},"url":"https://gzgzg2.github.io//posts/spring-boot-redis/"}</script><title>SpringBoot - Redis Client 적용기 | 일하는 냐옹이</title><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="일하는 냐옹이"><meta name="application-name" content="일하는 냐옹이"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"><link rel="stylesheet" href="/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1/dist/magnific-popup.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get MODE_ATTR() { return "data-mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } static get ID() { return "mode-toggle"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener("change", () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage({ direction: ModeToggle.ID, message: this.modeStatus }, "*"); } } /* ModeToggle */ const toggle = new ModeToggle(); function flipMode() { if (toggle.hasMode) { if (toggle.isSysDarkPrefer) { if (toggle.isLightMode) { toggle.clearMode(); } else { toggle.setLight(); } } else { if (toggle.isDarkMode) { toggle.clearMode(); } else { toggle.setDark(); } } } else { if (toggle.isSysDarkPrefer) { toggle.setLight(); } else { toggle.setDark(); } } toggle.notify(); } /* flipMode() */ </script><body data-spy="scroll" data-target="#toc" data-topbar-visible="true"><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" class="mx-auto"> <img src="/assets/img/profile/navi_1.jpeg" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">일하는 냐옹이</a></div><div class="site-subtitle font-italic">잠 자는게 좋아</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a><li class="nav-item"> <a href="/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a><li class="nav-item"> <a href="/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/gzgzg2" aria-label="github" target="_blank" rel="noopener"> <i class="fab fa-github"></i> </a> <a href="https://twitter.com/none" aria-label="twitter" target="_blank" rel="noopener"> <i class="fab fa-twitter"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['parkuram12','gmail.com'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" > <i class="fas fa-rss"></i> </a></div></div><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100 pl-3 pr-3 pl-md-4 pr-md-4"> <span id="breadcrumb"> <span> <a href="/"> Home </a> </span> <span>SpringBoot - Redis Client 적용기</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..."> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container pl-xl-4 pr-xl-4"><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pr-xl-4"><div class="post pl-1 pr-1 pl-md-2 pr-md-2"><h1 data-toc-skip>SpringBoot - Redis Client 적용기</h1><div class="post-meta text-muted"> <span> Posted <em class="" data-ts="1644937200" data-df="ll" data-toggle="tooltip" data-placement="bottom"> Feb 16, 2022 </em> </span> <span> Updated <em class="" data-ts="1645401600" data-df="ll" data-toggle="tooltip" data-placement="bottom"> Feb 21, 2022 </em> </span><div class="d-flex justify-content-between"> <span> By <em> <a href="https://github.com/gzgzg2">박우람</a> </em> </span><div> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="2192 words"> <em>12 min</em> read</span></div></div></div><div class="post-content"><h2 id="들어가며"> <a href="#들어가며" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> 들어가며</h2><p>스프링부트 Redis 적용 방법을 공유하고자 게시물을 작성하였다. 예제코드로 적용 방법을 알아보자</p><h2 id="redis-의존-설정"> <a href="#redis-의존-설정" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> 🌟 Redis 의존 설정</h2><p>Spring은 다양한 Redis 의존설정 방법을 제공한다.</p><p>1 - Gradle이나 Maven 설정 파일에 의존 추가하기</p><div class="language-scheme highlighter-rouge"><div class="code-header"> <span data-label-text="Scheme"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="nv">dependencies</span> <span class="err">{</span>
+	<span class="nv">implementation</span> <span class="ss">'org</span><span class="o">.</span><span class="nv">springframework</span><span class="o">.</span><span class="nv">boot:spring-boot-starter-data-redis</span><span class="o">'</span>
+<span class="err">}</span>
+</pre></table></code></div></div><p><br /> 2 - Intellij tool 을 사용하여 SpringBoot 프로젝트 생성시점에 Spring Data Redis 를 추가하는 방법이다.</p><p><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 550 500'%3E%3C/svg%3E" data-src="https://user-images.githubusercontent.com/56028408/154784437-6aff0467-1b9e-401d-a3da-928f16524194.png" alt="redis-intellij" width="550" height="500" data-proofer-ignore></p><p>3 - Spring initializr 로 프로젝트 생성 시점에 Spring Data Redis 추가하기</p><p><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 700 500'%3E%3C/svg%3E" data-src="https://user-images.githubusercontent.com/56028408/154784439-d6dafd63-1c91-47b5-b38f-4533574a972b.png" alt="initalizr-redis" width="700" height="500" data-proofer-ignore></p><p><br /></p><p><code class="language-plaintext highlighter-rouge">💡 참고로 Springboot 2 부터는 Lettuce가 기본 Redis Client로 사용된다. 본 프로젝트도 Lettuce를 사용하였다</code></p><h2 id="applicationyml-설정"> <a href="#applicationyml-설정" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> 🌟 A<strong>pplication.yml</strong> 설정</h2><p>정말 간단하게 Redis 의존을 추가했다. 이제 남은 건 A<strong>pplication.yml</strong> 작성과 Redis Configuration Bean 만 등록하면 된다. 아마도</p><p>ymal 작성은 매우 간단하다.</p><div class="language-scheme highlighter-rouge"><div class="code-header"> <span data-label-text="Scheme"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="nv">spring:</span>
+	<span class="nv">redis:</span>
+		<span class="nv">lettuce:</span>
+			<span class="nv">pool:</span>
+				<span class="nv">max-active:</span> <span class="mi">1000</span>
+				<span class="nv">max-idle:</span> <span class="mi">500</span>
+				<span class="nv">min-idle:</span> <span class="mi">2</span>
+				<span class="nv">max-wait:</span> <span class="mi">1000</span>
+	<span class="nv">port:</span> <span class="mi">6379</span>
+	<span class="nv">host:</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
+	<span class="nv">password:</span> <span class="ss">'vldpsxl1q2w3e</span><span class="o">'</span>
+</pre></table></code></div></div><p>Redis 에 관한 정보만 입력한다고 가정하면 이게 끝이다. 설정 정보는 아래 표 참조 바람<br /> <br /></p><p><strong>Redis Option</strong></p><div class="table-wrapper"><table><thead><tr><th>파라미터<th>파라미터 설명<th>기본값<th>기타<tbody><tr><td>spring.redis.pool.max-active<td>pool에 할당할 수 있는 최대 커넥션 수 (음수는 무제한)<td>8<td> <tr><td>spring.redis.pool.max-idle<td>pool의 “idle” 커넥션 최대수 (음수는 무제한)<td>8<td> <tr><td>spring.redis.pool.max-wait<td>사용 가능한 커넥션이 없을 때 호출자가 대기해야하는 최대 시간 (단위 : 밀리초, 음수는 무제한 차단)<td>-1<td> <tr><td>spring.redis.pool.min-idle<td>pool에서 관리하는 “idle” 커넥션 최소수 (양수일 떄만 유효)<td>0<td> <tr><td>spring.redis.port<td>redis server port<td>6379<td> <tr><td>spring.redis.host<td>redis server host<td>127.0.0.1<td> <tr><td>spring.redis.password<td>redis server login password<td> <td> <tr><td>spring.redis.timeout<td>커넥션 타임아웃 (단위: 밀리세컨드)<td>0<td> <tr><td>spring.redis.database<td>커넥션 팩토리에 사용되는 데이터베이스 인덱스<td>0<td> </table></div><h2 id="redisconnectionfactory-redistemplate-설정하기"> <a href="#redisconnectionfactory-redistemplate-설정하기" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> 🌟 RedisConnectionFactory, RedisTemplate 설정하기</h2><p>순조롭게 Yaml 파일 설정도 끝이났다. 이제는 Java를 사용해서 기존에 xml 파일로 설정했던 RedisFactory, RedisTemplate를 변경해보자.</p><h3 id="xml"> <a href="#xml" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> XML</h3><div class="language-xml highlighter-rouge"><div class="code-header"> <span data-label-text="XML"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre><td class="rouge-code"><pre><span class="c">&lt;!-- Redis 설정 고통 부분--&gt;</span>
+<span class="c">&lt;!-- Redis Serializer --&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"stringRedisSerializer"</span> <span class="na">class=</span><span class="s">"org.springframework.data.redis.serializer.StringRedisSerializer"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"jsonRedisSerializer"</span> <span class="na">class=</span><span class="s">"org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"jackson2JsonRedisSerializer"</span> <span class="na">class=</span><span class="s">"org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;constructor-arg&gt;</span>
+        <span class="nt">&lt;value&gt;</span>java.util.Map<span class="nt">&lt;/value&gt;</span>
+    <span class="nt">&lt;/constructor-arg&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+
+<span class="c">&lt;!-- Redis Template --&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"redisTemplate"</span> <span class="na">class=</span><span class="s">"org.springframework.data.redis.core.RedisTemplate"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"connectionFactory"</span> <span class="na">ref=</span><span class="s">"jedisConnFactory"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"keySerializer"</span> <span class="na">ref=</span><span class="s">"stringRedisSerializer"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"valueSerializer"</span> <span class="na">ref=</span><span class="s">"jsonRedisSerializer"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"hashKeySerializer"</span> <span class="na">ref=</span><span class="s">"stringRedisSerializer"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"hashValueSerializer"</span> <span class="na">ref=</span><span class="s">"jsonRedisSerializer"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</pre></table></code></div></div><h3 id="java"> <a href="#java" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> JAVA</h3><p><strong>RedisTemplate 설정</strong></p><div class="language-java highlighter-rouge"><div class="code-header"> <span data-label-text="Java"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre><td class="rouge-code"><pre><span class="nd">@Configuration</span>
+<span class="nd">@EnableRedisRepositories</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RedisTemplateConfig</span> <span class="o">{</span>
+
+		<span class="nd">@Value</span><span class="o">(</span><span class="s">"${spring.redis.host}"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">redisHost</span><span class="o">;</span>
+		<span class="nd">@Value</span><span class="o">(</span><span class="s">"${spring.redis.port}"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">redisPort</span><span class="o">;</span>
+
+		<span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">RedisConnectionFactory</span> <span class="nf">redisConnectionFactory</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">LettuceConnectionFactory</span><span class="o">(</span><span class="n">redisHost</span><span class="o">,</span><span class="n">redisPort</span><span class="o">);</span>
+		<span class="o">}</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">RedisTemplate</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">redisTemplate</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">RedisTemplate</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span><span class="nc">Object</span><span class="o">&gt;</span> <span class="n">redisTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RedisTemplate</span><span class="o">&lt;&gt;();</span>
+				<span class="n">redisTemplate</span><span class="o">.</span><span class="na">setKeySerializer</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringRedisSerializer</span><span class="o">());</span>
+				<span class="n">redisTemplate</span><span class="o">.</span><span class="na">setValueSerializer</span><span class="o">(</span><span class="k">new</span> <span class="nc">GenericJackson2JsonRedisSerializer</span><span class="o">());</span>
+				<span class="n">redisTemplate</span><span class="o">.</span><span class="na">setHashKeySerializer</span><span class="o">(</span><span class="k">new</span> <span class="nc">StringRedisSerializer</span><span class="o">());</span>
+				<span class="n">redisTemplate</span><span class="o">.</span><span class="na">setHashValueSerializer</span><span class="o">(</span><span class="k">new</span> <span class="nc">GenericJackson2JsonRedisSerializer</span><span class="o">());</span>
+				<span class="k">return</span> <span class="n">redisTemplate</span><span class="o">;</span>
+		<span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><p>기존 xml 파일은 번거롭게 Serializer 클래스를 매번 bean으로 등록해서 redisTemplate에 주입했다. 그런데 자바코드는 간단하게 인스턴스만 생성해서 주입하고 있는 것을 확인할 수 있다.</p><p><br /></p><p><code class="language-plaintext highlighter-rouge">💡 참고로 RedisTemplate는 RedisTemplate뿐만 아니라 StringRedisTemplate 도 존재한다. 게시물 주제와 연관이 없으므로 자세한 내용은 생략한다.</code></p><p><br /></p><h2 id="redis-message-listener"> <a href="#redis-message-listener" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> 🌟 Redis Message Listener</h2><p>이제 Redis Message Listener를 등록해보자.</p><h3 id="xml-1"> <a href="#xml-1" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> XML</h3><div class="language-xml highlighter-rouge"><div class="code-header"> <span data-label-text="XML"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre><td class="rouge-code"><pre><span class="c">&lt;!--첫번째--&gt;</span>
+ <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"redisKeyExpireMessageListener"</span> <span class="na">class=</span><span class="s">"org.springframework.data.redis.listener.adapter.MessageListenerAdapter"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;constructor-arg&gt;</span>
+            <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"framework.redis.RedisKeyExpireMessageListener"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/constructor-arg&gt;</span>
+    <span class="nt">&lt;/bean&gt;</span>
+
+<span class="c">&lt;!--두번째--&gt;</span>
+  <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"redisContainer1"</span> <span class="na">class=</span><span class="s">"org.springframework.data.redis.listener.RedisMessageListenerContainer"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"connectionFactory"</span> <span class="na">ref=</span><span class="s">"jedisConnFactory"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"messageListeners"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;map&gt;</span>
+              <span class="nt">&lt;entry</span> <span class="na">key-ref=</span><span class="s">"redisKeyExpireMessageListener"</span><span class="nt">&gt;</span>
+<span class="c">&lt;!--세번째--&gt;</span>
+                  <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">"org.springframework.data.redis.listener.PatternTopic"</span><span class="nt">&gt;</span>
+                      <span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">"__keyevent@*:expired"</span><span class="nt">/&gt;</span>
+                  <span class="nt">&lt;/bean&gt;</span>
+              <span class="nt">&lt;/entry&gt;</span>
+          <span class="nt">&lt;/map&gt;</span>
+      <span class="nt">&lt;/property&gt;</span>
+  <span class="nt">&lt;/bean&gt;</span>
+</pre></table></code></div></div><ol><li><code class="language-plaintext highlighter-rouge">MessageListenerAdapter</code> 빈에 <code class="language-plaintext highlighter-rouge">MessageListener</code> 를 주입한다.<li><code class="language-plaintext highlighter-rouge">RedisMessageListenerContainer</code> 빈 등록 <code class="language-plaintext highlighter-rouge">connectionFactory</code>, <code class="language-plaintext highlighter-rouge">messageListeners</code> 주입<li><code class="language-plaintext highlighter-rouge">redisKeyExpireMessageListener</code> 가 수신할 채널 혹은 패턴을 등록한다. 패턴은 이벤트 또는 채널명이 될 수 있다.</ol><h3 id="java-1"> <a href="#java-1" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> JAVA</h3><p><strong>MessageListenerAdapter 추가</strong></p><div class="language-java highlighter-rouge"><div class="code-header"> <span data-label-text="Java"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre>	<span class="nd">@Bean</span>
+  <span class="kd">public</span> <span class="nc">MessageListenerAdapter</span> <span class="nf">messageListenerAdapter</span><span class="o">(</span><span class="nc">RedisKeyExpireMessageListener</span> <span class="n">redisKeyExpireMessageListener</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nf">MessageListenerAdapter</span><span class="o">(</span><span class="n">redisKeyExpireMessageListener</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Bean</span>
+  <span class="kd">public</span> <span class="nc">RedisMessageListenerContainer</span> <span class="nf">redisMessageListenerContainer</span><span class="o">(</span>
+          <span class="nc">RedisConnectionFactory</span> <span class="n">redisConnectionFactory</span>
+          <span class="o">,</span> <span class="nc">MessageListenerAdapter</span> <span class="n">messageListenerAdapter</span><span class="o">,</span> <span class="nc">PatternTopic</span> <span class="n">patternTopic</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">RedisMessageListenerContainer</span> <span class="n">container</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RedisMessageListenerContainer</span><span class="o">();</span>
+      <span class="n">container</span><span class="o">.</span><span class="na">setConnectionFactory</span><span class="o">(</span><span class="n">redisConnectionFactory</span><span class="o">);</span>
+      <span class="n">container</span><span class="o">.</span><span class="na">addMessageListener</span><span class="o">(</span><span class="n">messageListenerAdapter</span><span class="o">,</span> <span class="n">patternTopic</span><span class="o">);</span>
+      <span class="k">return</span> <span class="n">container</span><span class="o">;</span>
+  <span class="o">}</span>
+
+	<span class="nd">@Bean</span>
+  <span class="kd">public</span> <span class="nc">PatternTopic</span> <span class="nf">patternTopic</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nf">PatternTopic</span><span class="o">(</span><span class="s">"__keyevent@*:expired"</span><span class="o">);</span>
+  <span class="o">}</span>
+</pre></table></code></div></div><p><strong>MessageListenerAdapter 에 주입할 MessageListener 구현</strong></p><div class="language-java highlighter-rouge"><div class="code-header"> <span data-label-text="Java"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RedisKeyExpireMessageListener</span> <span class="kd">implements</span> <span class="nc">MessageListener</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onMessage</span><span class="o">(</span><span class="nc">Message</span> <span class="n">message</span><span class="o">,</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">pattern</span><span class="o">)</span> <span class="o">{</span>
+				
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><p><br /> ❗ spring boot 의 <code class="language-plaintext highlighter-rouge">@EnableAutoConfiguration</code></p><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>spring boot 는  프로젝트에 추가된 라이브러리를 기반으로 실행에 필요한 환경을 자동으로 설정해준다.
+어떻게 보면 정말 편리한 기능이지만, 섬세한 설정이 필요한 경우엔 직접 설정하는 것이 안전하다.
+</pre></table></code></div></div><h2 id="redis-cache-management"> <a href="#redis-cache-management" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> 🌟 Redis Cache Management</h2><h3 id="xml-2"> <a href="#xml-2" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> XML</h3><div class="language-xml highlighter-rouge"><div class="code-header"> <span data-label-text="XML"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="c">&lt;!-- redis Cache 설정 --&gt;</span>
+  <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"redisCachePrefix"</span> <span class="na">class=</span><span class="s">"org.springframework.data.redis.cache.DefaultRedisCachePrefix"</span> <span class="nt">&gt;</span>
+      <span class="nt">&lt;constructor-arg</span> <span class="na">name=</span><span class="s">"delimiter"</span> <span class="na">value=</span><span class="s">"_"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/bean&gt;</span>
+
+  <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">"cacheManager"</span> <span class="na">class=</span><span class="s">"org.springframework.data.redis.cache.RedisCacheManager"</span> <span class="na">primary=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;constructor-arg</span> <span class="na">ref=</span><span class="s">"redisTemplate"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"defaultExpiration"</span> <span class="na">value=</span><span class="s">"1000"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"usePrefix"</span> <span class="na">value=</span><span class="s">"true"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"cachePrefix"</span> <span class="na">ref=</span><span class="s">"redisCachePrefix"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/bean&gt;</span>
+</pre></table></code></div></div><h3 id="java-2"> <a href="#java-2" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> JAVA</h3><p><strong>@EnableCaching 어노테이션 추가</strong></p><div class="language-java highlighter-rouge"><div class="code-header"> <span data-label-text="Java"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="nd">@SpringBootApplication</span>
+<span class="nd">@EnableCaching</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SpringBootStudyApplication</span> <span class="o">{</span>
+
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+      <span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">SpringBootStudyApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><p>@EnableCaching 어노테이션은 @Cacheable 메소드가 호출될 때 사용되는 CacheInterceptor 및 Proxy 또는 AspectJ 같은 캐시 관리에 필요한 스프링 구성요소를 등록하는 역할을 한다.</p><p>@EnableCaching 어노테이션 뿐만 아니라 xml 파일에서 cacheManger 를 선언해서 사용할 때도 동일하게 동작한다.</p><p><br /></p><p><strong>CacheManagerConfig.class</strong></p><div class="language-java highlighter-rouge"><div class="code-header"> <span data-label-text="Java"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre><td class="rouge-code"><pre><span class="nd">@Configuration</span>
+<span class="nd">@RequiredArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CacheManagerConfig</span> <span class="o">{</span>
+
+  <span class="kd">private</span> <span class="kd">final</span> <span class="nc">RedisCacheConfig</span> <span class="n">redisCacheConfig</span><span class="o">;</span>
+
+	<span class="nd">@Bean</span>
+  <span class="kd">public</span> <span class="nc">CacheManager</span> <span class="nf">cacheManager</span><span class="o">(</span><span class="nc">RedisConnectionFactory</span> <span class="n">redisConnectionFactory</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="nc">RedisCacheManager</span><span class="o">.</span><span class="na">RedisCacheManagerBuilder</span>
+              <span class="o">.</span><span class="na">fromConnectionFactory</span><span class="o">(</span><span class="n">redisConnectionFactory</span><span class="o">)</span>
+              <span class="o">.</span><span class="na">cacheDefaults</span><span class="o">(</span><span class="n">getDefaultRedisCacheConfiguration</span><span class="o">())</span>
+              <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+	<span class="o">}</span>
+
+  <span class="kd">private</span> <span class="nc">RedisCacheConfiguration</span> <span class="nf">getDefaultRedisCacheConfiguration</span><span class="o">()</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="nc">RedisCacheConfiguration</span><span class="o">.</span><span class="na">defaultCacheConfig</span><span class="o">()</span>
+              <span class="o">.</span><span class="na">entryTtl</span><span class="o">(</span><span class="nc">Duration</span><span class="o">.</span><span class="na">ofSeconds</span><span class="o">(</span><span class="n">redisCacheConfig</span><span class="o">.</span><span class="na">getTtl</span><span class="o">()))</span>
+              <span class="o">.</span><span class="na">prefixCacheNameWith</span><span class="o">(</span><span class="n">redisCacheConfig</span><span class="o">.</span><span class="na">getCachePrefix</span><span class="o">());</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</pre></table></code></div></div><p><strong>RedisCacheConfig.class</strong></p><div class="language-java highlighter-rouge"><div class="code-header"> <span data-label-text="Java"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="nd">@Component</span>
+<span class="nd">@ConfigurationProperties</span><span class="o">(</span><span class="n">prefix</span><span class="o">=</span><span class="s">"config.redis.cache"</span><span class="o">)</span>
+<span class="nd">@Getter</span>
+<span class="nd">@Setter</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RedisCacheConfig</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">cachePrefix</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">long</span> <span class="n">ttl</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></table></code></div></div><p><code class="language-plaintext highlighter-rouge">application.yml</code></p><div class="language-java highlighter-rouge"><div class="code-header"> <span data-label-text="Java"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="nl">config:</span>
+  <span class="nl">redis:</span>
+      <span class="nl">cache:</span>
+        <span class="n">cache</span><span class="o">-</span><span class="nl">ttl:</span> <span class="mi">1000</span>
+        <span class="n">cache</span><span class="o">-</span><span class="nl">prefix:</span> <span class="s">"_"</span>
+</pre></table></code></div></div><h2 id="lettuce를-선택한-이유"> <a href="#lettuce를-선택한-이유" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> 🌟 Lettuce를 선택한 이유</h2><p>마지막으로 Redis Client로 Lettuce를 선택한 이유를 설명하고자 한다.</p><h3 id="lettuce란"> <a href="#lettuce란" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> Lettuce란?</h3><p>lettuce는 Netty 기반의 Redis Client로 동기, 비동기 및 대응적 사용을 위해 확장 가능한 Thread-Safe Redis Client이다.</p><p>트랜잭션을 사용하지 않는 경우 하나의 연결을 공유할 수 있다. 추가로 Sentinel, Cluster, Pipelining, Auto-Reconnect 및 Redis 데이터 모델과 같은 고급 Redis 기능을 지원한다.</p><h3 id="lettuce-장점"> <a href="#lettuce-장점" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> Lettuce 장점</h3><ul><li>connection 인스턴스를 여러 쓰레드에서 공유할 수 있기 때문에 Thread-safe하다.<li>Lettuce는 비동기로 요청을 처리하기 때문에 성능적인 이점이 있다. (비동기, 동기 둘 다 지원하기 때문에 유연하게 사용가능)<li>Jedis보다 다양한 DataType지원</ul><p><br /></p><details> <summary>❗connection 인스턴스를 여러 쓰레드에서 공유할 수 있는 것이 장점인 이유는?</summary><div><div class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre>Redis 서버 인스턴스는 여러 클라이언트에 연결하여 명령을 동시에 보내고 받을 수 있지만, 명령을 실행할 때 각 인스턴스는 단일 스레드이다.
+    
+이는 애플리케이션이 멀티스레딩+단일 연결을 통해 Redis를 운영할 수 있다면 Redis 서버의 전체 연결 수를 효율화 할 수 있고,
+    
+여러 애플리케이션이 동일한 Redis 서버를 공유할 때 더 나은 안정성과 성능을 얻을 수 있다는 것을 의미한다.
+    
+응용 프로그램의 경우 여러 인스턴스를 유지 관리하는 리소스 소비가 줄어든다.
+</pre></table></code></div></div></div></details><h3 id="lettuce-단점"> <a href="#lettuce-단점" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> Lettuce 단점</h3><ul><li>connection 인스턴스의 공유라는 점에서 Thread-safe 한 것이기 때문에 Single-Thread로 동작하는 애플리케이션에서 레디스 데이터에 접근할 때는 또다르게 고려할 점이 생긴다.<li>하나의 connection을 공유하기 때문에 connection pool을 생성하지 않으면 transaction을 사용할 수 없다.</ul><p><br /></p><h2 id="jedis와-lettuce-비교"> <a href="#jedis와-lettuce-비교" class="anchor text-muted"><i class="fas fa-hashtag"></i></a> 🌟 Jedis와 Lettuce 비교</h2><p>그렇다면 Jedis와 Lettuce의 차이점이 무엇이길래 Springboot2 이후로는 Lettuce가 기본 Redis Client로 선택되었는지 알아보자 <br /> <br /> <br /></p><p><strong>Jedis보다 뛰어난 성능</strong></p><div class="table-wrapper"><table><thead><tr><th>Type<th>TPS(낮을수록 응답속도 빠름)<th>Redis CPU<th>Connections<th>응답 속도<tbody><tr><td>Jedis<td>31.000<td>20%<td>515<td>1000ms<tr><td>Lettuce<td>100,000<td>7%<td>6<td>7.5ms</table></div><p><br /> <br /> <br /></p><p><strong>Jedis와 Lettuce 기능비교</strong></p><div class="table-wrapper"><table><thead><tr><th>Supported Feature<th>Lettuce<th>Jedis<tbody><tr><td>Standalone Connection<td>O<td>O<tr><td>Master/Replica Connection<td>O<td> <tr><td>Redis Sentinel<td>Master Lookup, Sentinel Authentication, Replica Redis<td>Master Lookup<tr><td>Redis Cluster<td>Cluster Connection, Cluster Node Connection, Replica Reads<td>Cluster Connection, Cluster Node Connection<tr><td>Transport Channers<td>TCP, OS-native TCP(epoll, kqueue), Unix Domain Sockets<td>TCP<tr><td>Connection Pooling<td>O(using commons-pool2)<td>O(using commons-pool2)<tr><td>Other Connection Features<td>Singleton-connection sharing for non-blocking commands<td>JedisShardInfo support<tr><td>SSL Support<td>O<td>O<tr><td>Pub/Sub<td>O<td>O<tr><td>Pipelining<td>O<td>O<tr><td>Transactions<td>O<td>O<tr><td>DataType Support<td>Key, String, List, Set, Sorted Set, Hash Server, Stream, Scriping, Geo, HyperLogLog<td>Key, String, List, Set, Sorted Set, Scriping, Geo, HyperLogLog<tr><td>Reactive (non-blocking) API<td>O<td>O</table></div><p><br /> <br /></p><p><strong><em>참고 → O 표시는 지원되는 기능이다.</em></strong></p><p>표로 jedis와 Lettuce의 기능을 비교해본 결과, 두 가지 차이점을 찾을 수 있다.</p><ul><li>Jedis에서 지원하는 모든 기능을 Lettuce에서도 지원한다.<li>Jedis에서 지원하지 않는 기능도 Lettuce에서 지원한다.</ul><p><br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /></p><h1 id="reference">🌟<strong>**Reference</strong>**</h1><p><a href="http://arahansa.github.io/docs_spring/redis.html">http://arahansa.github.io/docs_spring/redis.html</a></p><p><a href="https://wnwngus.tistory.com/64">https://wnwngus.tistory.com/64</a></p><p><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/cache/annotation/EnableCaching.html">https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/cache/annotation/EnableCaching.html</a></p><p><a href="https://segmentfault.com/a/1190000040331000/en">https://segmentfault.com/a/1190000040331000/en</a></p><p><a href="https://mandlife.tistory.com/entry/Springboot-redis-%EC%84%A4%EC%A0%95-Jedis%EB%B3%B4%EB%8B%A4%EB%8A%94-Lettuce">https://mandlife.tistory.com/entry/Springboot-redis-설정-Jedis보다는-Lettuce</a></p></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/springboot/'>SpringBoot</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/springboot/" class="post-tag no-text-decoration" >springBoot</a> <a href="/tags/redis/" class="post-tag no-text-decoration" >redis</a> <a href="/tags/lettuce/" class="post-tag no-text-decoration" >lettuce</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/"> CC BY 4.0 </a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=SpringBoot+-+Redis+Client+%EC%A0%81%EC%9A%A9%EA%B8%B0+-+%EC%9D%BC%ED%95%98%EB%8A%94+%EB%83%90%EC%98%B9%EC%9D%B4&url=https%3A%2F%2Fgzgzg2.github.io%2F%2Fposts%2Fspring-boot-redis%2F" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=SpringBoot+-+Redis+Client+%EC%A0%81%EC%9A%A9%EA%B8%B0+-+%EC%9D%BC%ED%95%98%EB%8A%94+%EB%83%90%EC%98%B9%EC%9D%B4&u=https%3A%2F%2Fgzgzg2.github.io%2F%2Fposts%2Fspring-boot-redis%2F" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://t.me/share/url?url=https%3A%2F%2Fgzgzg2.github.io%2F%2Fposts%2Fspring-boot-redis%2F&text=SpringBoot+-+Redis+Client+%EC%A0%81%EC%9A%A9%EA%B8%B0+-+%EC%9D%BC%ED%95%98%EB%8A%94+%EB%83%90%EC%98%B9%EC%9D%B4" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i id="copy-link" class="fa-fw fas fa-link small" data-toggle="tooltip" data-placement="top" title="Copy link" data-title-succeed="Link copied successfully!"> </i> </span></div></div></div><script src="https://utteranc.es/client.js" repo="gzgzg2/blog-comments" issue-term="pathname" label="Comment🐱" theme="github-light" crossorigin="anonymous" async> </script></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted"><div class="access"><div id="access-lastmod" class="post"><div class="panel-heading">Recently Updated</div><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/strategy-pattern/">[Java Design Pattern] Strategy Pattern</a><li><a href="/posts/http2/">HTTP/2</a><li><a href="/posts/toby-spring-chapter-2/">[토비의 스프링] 토비의 스프링 3.1 2장 테스트</a><li><a href="/posts/toby-spring-chapter-1/">[토비의 스프링] 토비의 스프링 3.1 1장 오브젝트와 의존관계</a><li><a href="/posts/spring-applicationcontext/">SpringFramework - Web ApplicationContext</a></ul></div><div id="access-tags"><div class="panel-heading">Trending Tags</div><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/%EB%B0%98%ED%9A%A8%EA%B2%BD/">반효경</a> <a class="post-tag" href="/tags/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%EC%99%80-%EC%A0%95%EB%B3%B4%EA%B8%B0%EC%88%A0%EC%9D%98-%EC%9B%90%EB%A6%AC/">운영체제와 정보기술의 원리</a> <a class="post-tag" href="/tags/java/">Java</a> <a class="post-tag" href="/tags/operating-system/">Operating System</a> <a class="post-tag" href="/tags/dns/">DNS</a> <a class="post-tag" href="/tags/spring/">Spring</a> <a class="post-tag" href="/tags/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/">운영체제</a> <a class="post-tag" href="/tags/%ED%86%A0%EB%B9%84%EC%9D%98-%EC%8A%A4%ED%94%84%EB%A7%81/">토비의 스프링</a> <a class="post-tag" href="/tags/gof/">Gof</a> <a class="post-tag" href="/tags/os/">OS</a></div></div></div><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="pl-0 pr-4 mb-5"><div class="panel-heading pl-3 pt-2 mb-2">Contents</div><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 pl-3 pr-3 pr-xl-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/strategy-pattern/"><div class="card-body"> <em class="small" data-ts="1668783600" data-df="ll" > Nov 19, 2022 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>[Java Design Pattern] Strategy Pattern</h3><div class="text-muted small"><p> Strategy Pattern (책임 연쇄 패턴) 전략패턴 패턴은 Gof Pattern 중 행동패턴에 포함되며 런타임 시 알고리즘을 변경할 수 있다. 일반적으로 알고리즘을 정의하는 인터페이스를 하나 두고 알고리즘을 구현하는 여러개의 구현체로 구성된다. Diagrams Context 전략을 포함하고 있는 클래스 컨텍스트는 동작을 구현하는 책임을 S...</p></div></div></a></div><div class="card"> <a href="/posts/http2/"><div class="card-body"> <em class="small" data-ts="1665846000" data-df="ll" > Oct 16, 2022 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>HTTP/2</h3><div class="text-muted small"><p> HTTP/2 HTTP/2의 주요 목적은 전체 요청 및 응답 다중화를 활성화 하여 대기 시간을 줄이고 HTTP 헤더 필드의 효율적인 압축을 통해 프로토콜 오버헤드를 최소화하며 요청 우선 순위 지정 및 서버 푸시에 대한 지원을 추가하는 것. HTTP2는 HTTP 프로토콜의 핵심 개념은 변경되지 않았다. 대신 전체 프로세스를 관리하는 클라이언트와 서버 ...</p></div></div></a></div><div class="card"> <a href="/posts/toby-spring-chapter-2/"><div class="card-body"> <em class="small" data-ts="1664895600" data-df="ll" > Oct 5, 2022 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>[토비의 스프링] 토비의 스프링 3.1 2장 테스트</h3><div class="text-muted small"><p> 게시글에는 책의 설명과 무관한 내용이 섞여있습니다. 테스트 계속 변화하는 애플리케이션에 대응하는 첫번째 전략이 확장과 변화를 고려한 객체지향 설계와 그것을 효과적으로 담아낼 수 있는 IoC/DI 같은 기술이라면 두번째 전략은 만들어진 코드를 확신할 수 있게 해주고 변화에 유연하게 대처할 수 있는 테스트 기술이다. 스프링으로 개발하면...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/diary-spring/" class="btn btn-outline-primary" prompt="Older"><p>[2021-05-19] Spring을 왜 사용하는 거냐고 물었을 때 나는 제대로 대답할 수 있을까?</p></a> <a href="/posts/spring-applicationcontext/" class="btn btn-outline-primary" prompt="Newer"><p>SpringFramework - Web ApplicationContext</p></a></div></div></div><footer class="row pl-3 pr-3"><div class="col-12 d-flex justify-content-between align-items-center text-muted pl-0 pr-0"><div class="footer-left"><p class="mb-0"> © 2022 <a href="https://github.com/gzgzg2">박우람</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"><div id="access-tags"><div class="panel-heading">Trending Tags</div><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/%EB%B0%98%ED%9A%A8%EA%B2%BD/">반효경</a> <a class="post-tag" href="/tags/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%EC%99%80-%EC%A0%95%EB%B3%B4%EA%B8%B0%EC%88%A0%EC%9D%98-%EC%9B%90%EB%A6%AC/">운영체제와 정보기술의 원리</a> <a class="post-tag" href="/tags/java/">Java</a> <a class="post-tag" href="/tags/operating-system/">Operating System</a> <a class="post-tag" href="/tags/dns/">DNS</a> <a class="post-tag" href="/tags/spring/">Spring</a> <a class="post-tag" href="/tags/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/">운영체제</a> <a class="post-tag" href="/tags/%ED%86%A0%EB%B9%84%EC%9D%98-%EC%8A%A4%ED%94%84%EB%A7%81/">토비의 스프링</a> <a class="post-tag" href="/tags/gof/">Gof</a> <a class="post-tag" href="/tags/os/">OS</a></div></div></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="false"><div class="toast-header"> <button type="button" class="ml-2 ml-auto close" data-dismiss="toast" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div><div class="toast-body text-center pt-0"><p class="pl-2 pr-2 mb-3">A new version of content is available.</p><button type="button" class="btn btn-primary" aria-label="Update"> Update </button></div></div><script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No results found.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script> <script src="https://cdn.jsdelivr.net/combine/npm/magnific-popup@1/dist/jquery.magnific-popup.min.js,npm/lozad/dist/lozad.min.js,npm/clipboard@2/dist/clipboard.min.js"></script> <script src="https://cdn.jsdelivr.net/combine/npm/dayjs@1/dayjs.min.js,npm/dayjs@1/locale/en.min.js,npm/dayjs@1/plugin/relativeTime.min.js,npm/dayjs@1/plugin/localizedFormat.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.bundle.min.js"></script> <script defer src="/app.js"></script>

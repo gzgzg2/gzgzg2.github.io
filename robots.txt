@@ -1,0 +1,4 @@
+User-agent: Googlebot
+Allow: /
+Disallow: /diary/
+Sitemap: https://gzgzg2.github.io/sitemap.xml
